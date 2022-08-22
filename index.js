@@ -10,6 +10,10 @@
   };
 
   const ShopifyCartURLs = [
+    "/cart/add",
+    "/cart/update",
+    "/cart/change",
+    "/cart/clear",
     "/cart/add.js",
     "/cart/update.js",
     "/cart/change.js",
@@ -22,9 +26,17 @@
     return ShopifyCartURLs.includes(`/cart/${path}`);
   }
 
-  function normalizeURL(url) {
+  function updateType(url) {
     if (!url) return false;
-    return url.split("/").pop();
+    if (url.includes("cart/add")) {
+      return "add";
+    } else if (url.includes("cart/update")) {
+      return "update";
+    } else if (url.includes("cart/change")) {
+      return "change";
+    } else if (url.includes("cart/clear")) {
+      return "clear";
+    } else return false;
   }
 
   function dispatchEvent(url, detail) {
@@ -35,18 +47,18 @@
     }
 
     window.dispatchEvent(new CustomEvent(CartEvents.mutate, { detail }));
-    const urlSuffix = normalizeURL(url);
-    switch (urlSuffix) {
-      case "add.js":
+    const type = updateType(url);
+    switch (type) {
+      case "add":
         window.dispatchEvent(new CustomEvent(CartEvents.add, { detail }));
         break;
-      case "update.js":
+      case "update":
         window.dispatchEvent(new CustomEvent(CartEvents.update, { detail }));
         break;
-      case "change.js":
+      case "change":
         window.dispatchEvent(new CustomEvent(CartEvents.change, { detail }));
         break;
-      case "clear.js":
+      case "clear":
         window.dispatchEvent(new CustomEvent(CartEvents.clear, { detail }));
         break;
       default:

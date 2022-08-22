@@ -17,7 +17,7 @@ const MockCartResponse = {
 };
 
 const fetchRequest = async (url) => {
-  const response = await fetch(url, {
+  const response = await fetch(`cart/${url}`, {
     method: "POST",
     body: JSON.stringify({}),
   });
@@ -28,7 +28,7 @@ const fetchRequest = async (url) => {
 const XHRRequest = async (url) => {
   return new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url);
+    xhr.open("POST", `cart/${url}`);
     xhr.onload = function () {
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(JSON.parse(xhr.response));
@@ -48,44 +48,44 @@ beforeAll(() => {
 
 describe("checks for Cart Response without patching Fetch", () => {
   test("add request", async () => {
-    const data = await fetchRequest("/add.js");
+    const data = await fetchRequest("add");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("update request", async () => {
-    const data = await fetchRequest("/update.js");
+    const data = await fetchRequest("update");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("change request", async () => {
-    const data = await fetchRequest("/change.js");
+    const data = await fetchRequest("change");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("clear request", async () => {
-    const data = await fetchRequest("/clear.js");
+    const data = await fetchRequest("clear");
     expect(data).toMatchObject(MockCartResponse);
   });
 });
 
 describe("checks for Cart Response without patching XHR", () => {
   test("add frequest", async () => {
-    const data = await XHRRequest("/add.js");
+    const data = await XHRRequest("add");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("update request", async () => {
-    const data = await XHRRequest("/update.js");
+    const data = await XHRRequest("update");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("change request", async () => {
-    const data = await XHRRequest("/change.js");
+    const data = await XHRRequest("change");
     expect(data).toMatchObject(MockCartResponse);
   });
 
   test("clear request", async () => {
-    const data = await XHRRequest("/clear.js");
+    const data = await XHRRequest("clear");
     expect(data).toMatchObject(MockCartResponse);
   });
 });
@@ -135,28 +135,28 @@ describe("check that function is patched", () => {
 
     describe("XHR", () => {
       test("add request", async () => {
-        const data = await XHRRequest("/add.js");
+        const data = await XHRRequest("add");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:add"]).toMatchObject(MockCartResponse);
       });
 
       test("update request", async () => {
-        const data = await XHRRequest("/update.js");
+        const data = await XHRRequest("update");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:update"]).toMatchObject(MockCartResponse);
       });
 
       test("change request", async () => {
-        const data = await XHRRequest("/change.js");
+        const data = await XHRRequest("change");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:change"]).toMatchObject(MockCartResponse);
       });
 
       test("clear request", async () => {
-        const data = await XHRRequest("/clear.js");
+        const data = await XHRRequest("clear");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:clear"]).toMatchObject(MockCartResponse);
@@ -165,28 +165,28 @@ describe("check that function is patched", () => {
 
     describe("Fetch", () => {
       test("add request", async () => {
-        const data = await fetchRequest("/add.js");
+        const data = await fetchRequest("add");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:add"]).toMatchObject(MockCartResponse);
       });
 
       test("update request", async () => {
-        const data = await fetchRequest("/update.js");
+        const data = await fetchRequest("update");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:update"]).toMatchObject(MockCartResponse);
       });
 
       test("change request", async () => {
-        const data = await fetchRequest("/change.js");
+        const data = await fetchRequest("change");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:change"]).toMatchObject(MockCartResponse);
       });
 
       test("clear request", async () => {
-        const data = await fetchRequest("/clear.js");
+        const data = await fetchRequest("clear");
         expect(data).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:mutate"]).toMatchObject(MockCartResponse);
         expect(responseMap["SCE:clear"]).toMatchObject(MockCartResponse);
