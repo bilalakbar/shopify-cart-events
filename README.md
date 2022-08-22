@@ -18,25 +18,28 @@ This script fires 5 events.
 - **SCE:change** - anytime successful call to **change** endpoint of Shopify Cart API
 - **SCE:clear** - anytime successful call to **clear** endpoint of Shopify Cart API
 
+```
   window.addEventListener('SCE:mutate', (event) => {
-  // event.detail will be Shopify Cart object
+    // event.detail will be Shopify Cart object
   })
 
   window.addEventListener('SCE:add', (event) => {
-  // event.detail will be Shopify Cart object
+    // event.detail will be Shopify Cart object
   })
 
   window.addEventListener('SCE:update', (event) => {
-  // event.detail will be Shopify Cart object
+    // event.detail will be Shopify Cart object
   })
 
   window.addEventListener('SCE:change', (event) => {
-  // event.detail will be Shopify Cart object
+    // event.detail will be Shopify Cart object
   })
 
   window.addEventListener('SCE:clear', (event) => {
-  // event.detail will be Shopify Cart object
+    // event.detail will be Shopify Cart object
   })
+  
+```
 
 ## How this works ?
 
