@@ -1,0 +1,36 @@
+{
+  "name": "shopify-cart-events",
+  "version": "1.0.0",
+  "description": "Shopify Cart Events",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "minify": "uglifyjs index.js --compress --mangle --warn --output index.min.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "jest-environment-node",
+    "globals": {
+      "Shopify": {}
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-personal:bilalakbar/shopify-cart-events.git"
+  },
+  "keywords": [
+    "shopify",
+    "cart",
+    "events"
+  ],
+  "author": "Bilal Akbar",
+  "license": "MIT",
+  "devDependencies": {
+    "jest-environment-jsdom": "^28.1.3",
+    "whatwg-fetch": "^3.6.2",
+    "jest": "^28.1.3",
+    "nock": "^13.2.9",
+    "uglify-js": "^3.17.0"
+  }
+}
